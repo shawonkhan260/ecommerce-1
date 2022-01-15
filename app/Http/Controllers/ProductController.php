@@ -126,6 +126,14 @@ class ProductController extends Controller
 
         if($request->hasFile('image'))
         {
+            $images=json_decode($product->image);
+            for ($i=0;$i<count($images);$i++ )
+            {
+            $path="storage/photo/product/".$images[$i];
+            if (File::exists($path)) {
+                     File::delete($path);
+                }
+            }
             foreach($request->file('image') as $file)
             {
 
@@ -164,10 +172,14 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         if ($product->image) {
-        $path="storage/photo/product/".$product->image;
-        if (File::exists($path)) {
-            File::delete($path);
-        }
+            $images=json_decode($product->image);
+            for ($i=0;$i<count($images);$i++ )
+            {
+            $path="storage/photo/product/".$images[$i];
+            if (File::exists($path)) {
+                     File::delete($path);
+                }
+            }
 
         }
         $product->delete();
