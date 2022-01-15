@@ -39,17 +39,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'image' => 'required',
+            'image.*' => 'mimes:jpg,png,jpeg,gif,svg'
+            ]);
         $product=new Product();
         if($request->hasFile('image'))
         {
-            $file=$request->file('image');
-            $ext=$file->getClientOriginalExtension();
-            $filename=time().'.'.$ext;
+            foreach($request->file('image') as $file)
+            {
+            //$file=$request->file('image');
+            //$ext=$file->getClientOriginalExtension();
+            //$filename=time().'.'.$ext;
+            $original=$file->getClientOriginalName();
+            $filename=time().$original;
             $file->storeAs('public/photo/product',$filename);
-            $product->image=$filename;
+            $imagedata[]=$filename;
+            }
 
 
         }
+        $product->image=json_encode($imagedata);
         $product->name=$request->name;
         $product->cat_id=$request->cat_id;
         $product->small_description=$request->small_description;
@@ -101,18 +111,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        if ($request->hasFile('image'))
+        // if ($request->hasFile('image'))
+        // {
+        //     $path="storage/photo/product/".$product->image;
+        //     if (File::exists($path)) {
+        //         File::delete($path);
+        //     }
+        //     $file=$request->file('image');
+        //     $ext=$file->getClientOriginalExtension();
+        //     $filename=time().'.'.$ext;
+        //     $file->storeAs('public/photo/product',$filename);
+        //     $product->image=$filename;
+        // }
+
+        if($request->hasFile('image'))
         {
-            $path="storage/photo/product/".$product->image;
-            if (File::exists($path)) {
-                File::delete($path);
-            }
-            $file=$request->file('image');
-            $ext=$file->getClientOriginalExtension();
-            $filename=time().'.'.$ext;
+            foreach($request->file('image') as $file)
+            {
+
+            $original=$file->getClientOriginalName();
+            $filename=time().$original;
             $file->storeAs('public/photo/product',$filename);
-            $product->image=$filename;
+            $imagedata[]=$filename;
+            }
+
+
         }
+        $product->image=json_encode($imagedata);
         $product->name=$request->name;
         $product->cat_id=$request->cat_id;
         $product->small_description=$request->small_description;

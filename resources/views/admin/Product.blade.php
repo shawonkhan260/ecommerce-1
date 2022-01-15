@@ -131,7 +131,7 @@
 
                             <div class="form-group">
                                 <label for="file">Photo</label>
-                                <input type="file" class="form-control" name="image">
+                                <input type="file" class="form-control" name="image[]" multiple="multiple" >
 
                             </div>
                             <div class="modal-footer">
@@ -189,7 +189,14 @@
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->status}}</td>
                                 <td>{{$product->tranding}}</td>
-                                <td ><img src="storage/photo/product/{{$product->image}}" style="height:50px; width:50px" alt=""></td>
+                                <td >
+                                    @php
+                                        $images=json_decode($product->image);
+                                    @endphp
+                                    @for ($i=0;$i<count($images);$i++ )
+                                    <img src="storage/photo/product/{{$images[$i]}}" style="height:50px; width:50px" alt="">
+                                    @endfor
+                                </td>
                                 <td>
                                     <a href="{{route('product.edit',$product->id)}}" class="btn btn-info">edit</a>
                                     <form style="display:inline" action="{{route('product.destroy',$product->id)}}" method="post">

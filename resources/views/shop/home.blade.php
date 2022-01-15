@@ -93,7 +93,10 @@
                 <div class="item">
                     <div class="products-single  px-1">
                         <div class="box-img-hover ">
-                            <img  src="{{Storage::url('photo/product/'.$product->image)}}"  style="height:300px" alt="">
+                            @php
+                                $images=json_decode($product->image);
+                            @endphp
+                            <img  src="{{Storage::url('photo/product/'.$images[0])}}"  style="height:300px" alt="">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{Route('productdetails',$product->id)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

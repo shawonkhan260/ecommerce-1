@@ -116,7 +116,7 @@
 
                     <div class="form-group">
                         <label for="file">Photo</label>
-                        <input type="file" class="form-control" name="image">
+                        <input type="file" class="form-control" name="image[]" multiple>
 
                     </div>
                     <div class="modal-footer">

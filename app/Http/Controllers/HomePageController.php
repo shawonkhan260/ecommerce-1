@@ -28,6 +28,7 @@ class HomePageController extends Controller
     public function productdetails($id)
     {
         $product=Product::where('id',$id)->first();
-        return view('shop.product_details',compact('product'));
+        $images=json_decode($product->image);
+        return view('shop.product_details',compact('product','images'));
     }
 }
