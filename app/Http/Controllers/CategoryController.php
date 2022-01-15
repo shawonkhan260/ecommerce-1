@@ -44,7 +44,9 @@ class CategoryController extends Controller
             $file=$request->file('photo');
             $ext=$file->getClientOriginalExtension();
             $filename=time().'.'.$ext;
-            $file->move('photo/category',$filename);
+            $file->storeAs('public/photo/category',$filename); //for storage it will not upload in git
+            // $file->move('photo/category',$filename); for public folder
+
             $category->photo=$filename;
 
 
@@ -96,14 +98,14 @@ class CategoryController extends Controller
     {
         if ($request->hasFile('photo'))
         {
-            $path="photo/category/".$category->photo;
+            $path="storage/photo/category/".$category->photo;
             if (File::exists($path)) {
                 File::delete($path);
             }
             $file=$request->file('photo');
             $ext=$file->getClientOriginalExtension();
             $filename=time().'.'.$ext;
-            $file->move('photo/category',$filename);
+            $file->storeAs('public/photo/category',$filename);
             $category->photo=$filename;
         }
         $category->name=$request->name;
@@ -127,7 +129,7 @@ class CategoryController extends Controller
     public function destroy(category $category)
     {
         if ($category->photo) {
-        $path="photo/category/".$category->photo;
+        $path="storage/photo/category/".$category->photo;
         if (File::exists($path)) {
             File::delete($path);
             }

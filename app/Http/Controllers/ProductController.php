@@ -45,7 +45,7 @@ class ProductController extends Controller
             $file=$request->file('image');
             $ext=$file->getClientOriginalExtension();
             $filename=time().'.'.$ext;
-            $file->move('photo/product',$filename);
+            $file->storeAs('public/photo/product',$filename);
             $product->image=$filename;
 
 
@@ -103,14 +103,14 @@ class ProductController extends Controller
     {
         if ($request->hasFile('image'))
         {
-            $path="photo/product/".$product->image;
+            $path="storage/photo/product/".$product->image;
             if (File::exists($path)) {
                 File::delete($path);
             }
             $file=$request->file('image');
             $ext=$file->getClientOriginalExtension();
             $filename=time().'.'.$ext;
-            $file->move('photo/product',$filename);
+            $file->storeAs('public/photo/product',$filename);
             $product->image=$filename;
         }
         $product->name=$request->name;
@@ -139,7 +139,7 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         if ($product->image) {
-        $path="photo/product/".$product->image;
+        $path="storage/photo/product/".$product->image;
         if (File::exists($path)) {
             File::delete($path);
         }

@@ -153,7 +153,8 @@
                                 <td>{{$cat->meta_description}}</td>
                                 <td>{{$cat->status}}</td>
                                 <td>{{$cat->popular}}</td>
-                                <td ><img src="/photo/category/{{$cat->photo}}" style="height:50px; width:50px" alt=""></td>
+                                <td ><img src="{{Storage::url('photo/category/'. $cat->photo)}}" style="height:50px; width:50px" alt=""></td>
+                                {{-- <td ><img src="photo/category/{{$cat->photo}}" style="height:50px; width:50px" alt=""></td> --}}
                                 <td>
                                     <a href="{{url('category_edit/'.$cat->id)}}" class="btn btn-info">edit</a>
                                     <a href="{{url('category_delete/'.$cat->id)}}" class="btn btn-danger" id="">delete</a>

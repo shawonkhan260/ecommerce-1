@@ -189,7 +189,7 @@
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->status}}</td>
                                 <td>{{$product->tranding}}</td>
-                                <td ><img src="/photo/product/{{$product->image}}" style="height:50px; width:50px" alt=""></td>
+                                <td ><img src="storage/photo/product/{{$product->image}}" style="height:50px; width:50px" alt=""></td>
                                 <td>
                                     <a href="{{route('product.edit',$product->id)}}" class="btn btn-info">edit</a>
                                     <form style="display:inline" action="{{route('product.destroy',$product->id)}}" method="post">

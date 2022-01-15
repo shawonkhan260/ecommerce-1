@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomePageController;
 //use App\Http\Controllers\ProductController;
 use Illuminate\Routing\RouteAction;
+use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,12 +20,10 @@ use Illuminate\Support\Facades\Auth;
 */
 // use App\Http\Controllers\CategoryController;
 
-Route::get('/', function () {
+Route::get('welcome', function () {
     return view('welcome');
 });
-Route::get('/ad', function () {
-    return view('admin.dashboard');
-});
+
 
 Auth::routes();
 
@@ -47,3 +47,17 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
 });
+Route::get('/',[HomePageController::class,'index'])->name('shop');
+Route::get('/categoryproduct/{id}',[HomePageController::class,'categorywiseproduct'])->name('category.product');
+Route::get('/categorylist',[HomePageController::class,'categorylist'])->name('categorylist');
+Route::get('/productdetails/{id}',[HomePageController::class,'productdetails'])->name('productdetails');
+
+
+
+Route::get('/about', function () {
+    return view('shop.about');
+})->name('about');
+
+Route::get('/details', function () {
+    return view('shop.product_details');
+})->name('details');
