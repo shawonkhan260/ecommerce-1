@@ -34,6 +34,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $subtotal=0;
+                                    $discount=0;
+                                    $total=0;
+                                @endphp
                                 @foreach ($carts as $item)
 
                                 <tr>
@@ -51,12 +56,18 @@
                                     <td class="quantity-box"><input type="number" class="product_qty" size="4" value="{{$item->product_qty}}" min="1" step="1" max="{{$item->product->qty}}" class="c-input-text qty text"></td>
                                     <input type="hidden" class="cart_id" value={{$item->id}}>
                                     <td class="total-pr">
-                                        <p>totall will be here</p>
+                                        @php
+                                            $subtotal+=$item->product->original_price*$item->product_qty;
+                                            $discount+=($item->product->original_price-$item->product->selling_price)*$item->product_qty;
+                                            $total=$item->product->selling_price*$item->product_qty;
+                                        @endphp
+                                        <p>{{$total}}</p>
                                     </td>
                                     <td class="">
                                         <a  class="deleteitem" href="{{url('cartdelete/'.$item->id)}}"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>
@@ -90,20 +101,20 @@
                         <h3>Order summary</h3>
                         <div class="d-flex">
                             <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> $ 130 </div>
+                            <div class="ml-auto font-weight-bold"> {{$subtotal}} </div>
                         </div>
                         <div class="d-flex">
                             <h4>Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 40 </div>
+                            <div class="ml-auto font-weight-bold"> {{$discount}}</div>
                         </div>
                         <hr class="my-1">
                         <div class="d-flex">
                             <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
+                            <div class="ml-auto font-weight-bold"> $ 00 </div>
                         </div>
                         <div class="d-flex">
                             <h4>Tax</h4>
-                            <div class="ml-auto font-weight-bold"> $ 2 </div>
+                            <div class="ml-auto font-weight-bold"> $ 0 </div>
                         </div>
                         <div class="d-flex">
                             <h4>Shipping Cost</h4>
@@ -112,7 +123,7 @@
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ 388 </div>
+                            <div class="ml-auto h5"> $ {{$subtotal-$discount}} </div>
                         </div>
                         <hr> </div>
                 </div>
@@ -144,8 +155,7 @@ $(document).ready(function () {
                     'cart_id':cart_id,
                 },
                 success: function (response) {
-                    swal(response.status);
-
+                location.reload();
                 }
             });
 
