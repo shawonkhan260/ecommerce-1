@@ -35,7 +35,10 @@
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="{{Storage::url('photo/product/'. $product->image)}}" class="img-fluid" style="height: 300px; width:100%" alt="Image">
+                            @php
+                                $images=json_decode($product->image);
+                            @endphp
+                            <img src="{{Storage::url('photo/product/'. $images[0])}}" class="img-fluid" style="height: 300px; width:100%" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

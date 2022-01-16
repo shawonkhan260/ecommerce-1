@@ -65,7 +65,7 @@
                         @foreach ($categorys as $category)
                         <div class="item">
                             <div class="card">
-                                <img src="{{Storage::url('photo/category/'.$category->photo)}}" style="height:300px" alt="">
+                                <img src="{{Storage::url('photo/category/'.$category->photo)}}" style="height:400px" alt="">
                                 <a class="btn hvr-hover" href="{{Route('category.product',$category->id)}}">{{$category->name}}</a>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             @php
                                 $images=json_decode($product->image);
                             @endphp
-                            <img  src="{{Storage::url('photo/product/'.$images[0])}}"  style="height:300px" alt="">
+                            <img  src="{{Storage::url('photo/product/'.$images[0])}}"  style="height:400px" alt="">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{Route('productdetails',$product->id)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

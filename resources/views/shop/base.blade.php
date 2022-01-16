@@ -9,6 +9,9 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- csrf token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Site Metas -->
     <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
     <meta name="keywords" content="">
@@ -133,6 +136,8 @@
     <script src="/shop/js/contact-form-script.js"></script>
     <script src="/shop/js/custom.js"></script>
     @yield('extra_js')
+    <!-- Sweet Alert -->
+<script src="{{asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
 </body>
 
 </html>

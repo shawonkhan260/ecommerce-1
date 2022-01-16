@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomePageController;
 //use App\Http\Controllers\ProductController;
@@ -51,6 +52,9 @@ Route::get('/',[HomePageController::class,'index'])->name('shop');
 Route::get('/categoryproduct/{id}',[HomePageController::class,'categorywiseproduct'])->name('category.product');
 Route::get('/categorylist',[HomePageController::class,'categorylist'])->name('categorylist');
 Route::get('/productdetails/{id}',[HomePageController::class,'productdetails'])->name('productdetails');
+
+//addtocart
+Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
 
 
 
