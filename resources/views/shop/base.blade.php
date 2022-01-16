@@ -138,6 +138,11 @@
     @yield('extra_js')
     <!-- Sweet Alert -->
 <script src="{{asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+@if (session('status'))
+<script>
+    swal("{{session('status')}}");
+</script>
+@endif
 </body>
 
 </html>

@@ -79,6 +79,7 @@
                     <li class="dropdown">
                         @php
                         $categorys=App\Models\category::all()
+
                         @endphp
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Category</a>
                         <ul class="dropdown-menu">
@@ -89,49 +90,73 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    @if (Auth::check())
+
+                    <li class="nav-item">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('Logout') }}
+                     </a>
+
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                         @csrf
+                     </form>
+                    </li>
+                    @endif
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
 
             <!-- Start Atribute Navigation -->
+            @php
+                $cart=App\Models\cart::where('user_id',Auth::id())->get();
+            @endphp
+            @if (Request::is('cart'))
+            @else
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu"><a href="#">
                     <i class="fa fa-shopping-bag"></i>
-                        <span class="badge">3</span>
+
+                    @if (Auth::check())
+                        <span class="badge">{{$cart->count()}}</span>
+                    @endif
                 </a></li>
                 </ul>
             </div>
+            @endif
             <!-- End Atribute Navigation -->
         </div>
         <!-- Start Side Menu -->
+        @if (Auth::check())
         <div class="side">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
                 <ul class="cart-list">
+                    @foreach ($cart as $item)
                     <li>
                         <a href="#" class="photo"><img src="/shop/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Delica omtantur </a></h6>
-                        <p>1x - <span class="price">$80.00</span></p>
+                        <h6><a href="#">{{$item->product->name}} </a></h6>
+                        <p>{{$item->product_qty}}X - <span class="price">{{$item->product->selling_price}} ৳</span></p>
                     </li>
-                    <li>
-                        <a href="#" class="photo"><img src="/shop/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Omnes ocurreret</a></h6>
-                        <p>1x - <span class="price">$60.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="/shop/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Agam facilisis</a></h6>
-                        <p>1x - <span class="price">$40.00</span></p>
-                    </li>
-                    <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
-                    </li>
+
+                    @endforeach
                 </ul>
+                <p class="text-center"><a href="{{Route('cart')}}" >go to cart page</a></p>
             </li>
         </div>
+        @else
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <li class="cart-box">
+                <h2>Please  first <a href="{{url('login')}}" type="button" class="btn btn-success">Log in</a></h2>
+            </li>
+        </div>
+        @endif
+
         <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->

@@ -1,6 +1,6 @@
 @extends('shop.base')
 @section('base')
-<div class="py-3 mb-4 shadow-sm border-top bg-info">
+<div class="py-3 mb-4 shadow-sm border-top " style="background-color: rgb(243, 241, 237)">
     <div class="container">
         <h4 class="mb-0"><a href="{{Route('category.product',$product->cat_id)}}">{{$product->category->name}}</a> / {{$product->name}}</h4>
     </div>
@@ -103,9 +103,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <!-- End Cart -->

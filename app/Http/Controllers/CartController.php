@@ -37,7 +37,15 @@ class CartController extends Controller
 
     public function index()
     {
-        //
+        if (Auth::check()) {
+            $carts=cart::where('user_id',Auth::id())->get();
+            return view('shop.cart',compact('carts'));
+        }
+        else
+        {
+            return back()->with('status','please log in first');
+        }
+
     }
 
 
@@ -67,12 +75,21 @@ class CartController extends Controller
 
     public function update(Request $request, cart $cart)
     {
-        //
+        $product_qty=$request->product_qty;
+        $cart_id=$request->cart_id;
+        $cartid=cart::where('id',$cart_id)->where('user_id',Auth::id())->first();
+        $cartid->product_qty=$product_qty;
+        $cartid->update();
+        return response()->json(['status'=>" Cart Updated successfully"]);
+
+
     }
 
 
-    public function destroy(cart $cart)
+    public function destroy(Cart $cart)
     {
-        //
+        $cart->where('user_id',Auth::id())->first();
+        $cart->delete();
+        return back()->with('status','product deleted from cart successfully');
     }
 }
