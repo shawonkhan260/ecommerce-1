@@ -38,8 +38,14 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $carts=cart::where('user_id',Auth::id())->get();
-            return view('shop.cart',compact('carts'));
+            if (cart::where('user_id',Auth::id())->exists()) {
+                $carts=cart::where('user_id',Auth::id())->get();
+                return view('shop.cart',compact('carts'));
+            }
+            else {
+            return redirect()->route('shop')->with('status','please add product to cart first');
+            }
+
         }
         else
         {

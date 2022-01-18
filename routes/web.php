@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\WishlistController;
 //use App\Http\Controllers\ProductController;
@@ -66,6 +67,10 @@ Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
 Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
 Route::get('wishlistdestroy/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('wishlist.count');
+
+//checkout
+Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
+Route::post('checkoutstore',[CheckoutController::class,'store'])->name('checkout.store');
 
 
 

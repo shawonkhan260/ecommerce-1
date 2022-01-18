@@ -190,7 +190,7 @@
                 },
                 success: function (response) {
                     swal(response.status);
-
+                    loadcart();
                 }
             });
 
@@ -213,7 +213,7 @@
                 },
                 success: function (response) {
                     swal(response.status);
-
+                    loadwishlist();
                 }
             });
 
