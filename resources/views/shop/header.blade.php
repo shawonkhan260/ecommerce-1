@@ -105,29 +105,42 @@
                     </li>
                     @endif
 
+                    @php
+                        $cart=App\Models\cart::where('user_id',Auth::id())->get();
+                        $wishlist=App\Models\wishlist::where('user_id',Auth::id())->get();
+                    @endphp
+
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
 
             <!-- Start Atribute Navigation -->
-            @php
-                $cart=App\Models\cart::where('user_id',Auth::id())->get();
-            @endphp
-            @if (Request::is('cart'))
-            @else
+
+
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    @if (Request::is('cart'))
+                    @else
                     <li class="side-menu"><a href="#">
                     <i class="fa fa-shopping-bag"></i>
 
                     @if (Auth::check())
                         <span class="badge">{{$cart->count()}}</span>
                     @endif
-                </a></li>
+                    </a></li>
+                    @endif
+                    <li class=""><a class="" href="{{Route('wishlist')}}"><i class="fas fa-heart"></i>
+
+                        @if (Auth::check())
+                            <span class="badge">{{$wishlist->count()}}</span>
+                        @endif
+                    </a></li>
+
+
                 </ul>
             </div>
-            @endif
             <!-- End Atribute Navigation -->
         </div>
         <!-- Start Side Menu -->
@@ -144,8 +157,10 @@
                     </li>
 
                     @endforeach
+                    <li class="total">
+                        <a href="{{Route('cart')}}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                    </li>
                 </ul>
-                <p class="text-center"><a href="{{Route('cart')}}" >go to cart page</a></p>
             </li>
         </div>
         @else

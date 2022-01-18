@@ -89,7 +89,7 @@
 
                                 <div class="add-to-btn">
                                     <div class="add-comp">
-                                        <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
+                                        <a class="btn hvr-hover addToWishlistBtn" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
                                         <a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
                                     </div>
                                     <div class="share-bar">
@@ -109,36 +109,7 @@
 
 @endsection
 @section('extra_js')
-<script>
-    $(document).ready(function () {
-        $('.addToCartBtn').click(function (e) {
-            e.preventDefault();
-            var product_id= $(this).closest('.product_data').find('.product_id').val();
-            var product_qty= $(this).closest('.product_data').find('.product_qty').val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
-            $.ajax({
-                method: "POST",
-                url: "{{ route('addtocart') }}",
-                data: {
-                    'product_id':product_id,
-                    'product_qty':product_qty,
-                },
-                success: function (response) {
-                    swal(response.status);
-
-                }
-            });
-
-        });
-
-    });
-
-</script>
 @endsection
 
 

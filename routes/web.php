@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\WishlistController;
 //use App\Http\Controllers\ProductController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Routing\RouteUri;
@@ -58,6 +59,12 @@ Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
 Route::get('cart',[CartController::class,'index'])->name('cart');
 Route::get('cartdelete/{cart}',[CartController::class,'destroy'])->name('cart.destroy');
 Route::post('cartupdate',[CartController::class,'update'])->name('cart.update');
+//addtowishlist
+Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
+Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
+Route::get('wishlistdestroy/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
+
+
 
 
 

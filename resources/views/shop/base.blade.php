@@ -143,6 +143,58 @@
     swal("{{session('status')}}");
 </script>
 @endif
+<script>
+    //add to cart and add to wishlist button work for this function
+    $(document).ready(function () {
+        $('.addToCartBtn').click(function (e) {
+            e.preventDefault();
+            var product_id= $(this).closest('.product_data').find('.product_id').val();
+            var product_qty= $(this).closest('.product_data').find('.product_qty').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('addtocart') }}",
+                data: {
+                    'product_id':product_id,
+                    'product_qty':product_qty,
+                },
+                success: function (response) {
+                    swal(response.status);
+
+                }
+            });
+
+        });
+        $('.addToWishlistBtn').click(function (e) {
+            e.preventDefault();
+            var product_id= $(this).closest('.product_data').find('.product_id').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('addtowishlist') }}",
+                data: {
+                    'product_id':product_id,
+                },
+                success: function (response) {
+                    swal(response.status);
+
+                }
+            });
+
+        });
+
+    });
+</script>
 </body>
 
 </html>

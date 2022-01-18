@@ -50,9 +50,9 @@
     <!-- End Slider -->
 
 {{-- start top category --}}
-    <div class="py-5" >
+    <div class="py-5">
             <div class="row">
-                <div class="col-lg-12  ">
+                <div class="col-lg-12">
                     <div class="row">
                         <div class="title-all ml-5 col-md-9 d-inline">
                             <h1>Top Categories</h1>
@@ -90,20 +90,22 @@
             </div>
             <div class="main-instagram owl-carousel owl-theme px-5">
                 @foreach ($products as $product)
-                <div class="item">
+                <div class="item product_data">
                     <div class="products-single  px-1">
                         <div class="box-img-hover ">
                             @php
                                 $images=json_decode($product->image);
                             @endphp
+                            <input type="hidden" class="product_id"  value="{{$product->id}}">
+                            <input type="hidden" class="product_qty"  value="1">
                             <img  src="{{Storage::url('photo/product/'.$images[0])}}"  style="height:400px" alt="">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{Route('productdetails',$product->id)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" class="addToWishlistBtn" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart addToCartBtn" href="#">Add to Cart</a>
                             </div>
                         </div>
                         <div class="why-text">
