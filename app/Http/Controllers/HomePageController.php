@@ -20,6 +20,16 @@ class HomePageController extends Controller
         $cat_name=Category::find($id)->name;
         return view('shop.categoryproduct',compact('products','cat_name'));
     }
+    public function productlist()
+    {
+        $products=Product::all();
+        return view('shop.productlist',compact('products'));
+    }
+    public function searchproduct(Request $request)
+    {
+        $products=Product::where('name','LIKE','%'.$request->search.'%')->get();
+        return view('shop.productlist',compact('products'));
+    }
     public function categorylist()
     {
         $categorys=Category::all();

@@ -85,7 +85,7 @@
                     <h1>Trending Products</h1>
                 </div>
                 <div class="col-md-2 d-inline ">
-                    <a href="" type="button" class="btn btn-success">show all products</a>
+                    <a href="{{Route('product.list')}}" type="button" class="btn btn-success">show all products</a>
                 </div>
             </div>
             <div class="main-instagram owl-carousel owl-theme px-5">
