@@ -146,6 +146,31 @@
 <script>
     //add to cart and add to wishlist button work for this function
     $(document).ready(function () {
+        //cart count without load using url
+        loadwishlist();
+        loadcart();
+        function loadcart(){
+            $.ajax({
+                method: "GET",
+                url: "{{ route('cart.count') }}",
+                success: function (response) {
+                    $('.cartcount').html('');
+                    $('.cartcount').html(response.count);
+                }
+            });
+        }
+        function loadwishlist(){
+            $.ajax({
+                method: "GET",
+                url: "{{ route('wishlist.count') }}",
+                success: function (response) {
+                    $('.wishlistcount').html('');
+                    $('.wishlistcount').html(response.count);
+                }
+            });
+        }
+
+        //add to cart
         $('.addToCartBtn').click(function (e) {
             e.preventDefault();
             var product_id= $(this).closest('.product_data').find('.product_id').val();
@@ -170,6 +195,7 @@
             });
 
         });
+        //add to wishlist
         $('.addToWishlistBtn').click(function (e) {
             e.preventDefault();
             var product_id= $(this).closest('.product_data').find('.product_id').val();

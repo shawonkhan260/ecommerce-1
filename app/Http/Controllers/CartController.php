@@ -92,4 +92,10 @@ class CartController extends Controller
         $cart->delete();
         return back()->with('status','product deleted from cart successfully');
     }
+
+    public function cartcount()
+    {
+        $cart=Cart::where('user_id',Auth::id())->count();
+        return response()->json(['count'=> $cart]);
+    }
 }

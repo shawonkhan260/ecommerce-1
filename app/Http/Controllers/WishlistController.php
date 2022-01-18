@@ -51,4 +51,9 @@ class WishlistController extends Controller
         $id->delete();
         return back()->with('status','product deleted from wishlist successfully');
     }
+    public function wishlistcount()
+    {
+        $wishlist=wishlist::where('user_id',Auth::id())->count();
+        return response()->json(['count'=> $wishlist]);
+    }
 }

@@ -127,14 +127,14 @@
                     <i class="fa fa-shopping-bag"></i>
 
                     @if (Auth::check())
-                        <span class="badge">{{$cart->count()}}</span>
+                        <span class="badge cartcount">0</span>
                     @endif
                     </a></li>
                     @endif
                     <li class=""><a class="" href="{{Route('wishlist')}}"><i class="fas fa-heart"></i>
 
                         @if (Auth::check())
-                            <span class="badge">{{$wishlist->count()}}</span>
+                            <span class="badge wishlistcount">0</span>
                         @endif
                     </a></li>
 
