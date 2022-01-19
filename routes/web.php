@@ -84,7 +84,6 @@ Route::middleware(['auth'])->group(function () {
     //addtowishlist
     Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
     Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
-    Route::get('wishlistdestroy/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
     Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('wishlist.count');
 
     //checkout
@@ -102,3 +101,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/details', function () {
     return view('shop.product_details');
 })->name('details');
+
+//wishlist remove button
+Route::post('wishlistremove',[WishlistController::class,'wishlistremove'])->name('wishlist.remove');

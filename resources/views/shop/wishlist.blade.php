@@ -17,7 +17,7 @@
     <!-- End All Title Box -->
 
     <!-- Start Wishlist  -->
-    <div class="wishlist-box-main">
+    <div class="wishlist-box-main wishlistreload">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -38,6 +38,7 @@
                                 <tr class="product_data">
                                     <input type="hidden" class="product_id"  value="{{$item->product_id}}">
                                 <input type="hidden" class="product_qty"  value="1">
+                                <input type="hidden" class="wishlist_id"  value="{{$item->id}}">
                                     <td class="thumbnail-img">
                                     @php
                                         $images=json_decode($item->product->image);
@@ -57,7 +58,7 @@
                                         <a class="btn hvr-hover addToCartBtn" href="#">Add to Cart</a>
                                     </td>
                                     <td class="remove-pr">
-                                        <a href="{{Route('wishlist.destroy',$item->id)}}">
+                                        <a class="removewishlist">
 									<i class="fas fa-times"></i>
 								</a>
                                     </td>

@@ -45,15 +45,15 @@ class WishlistController extends Controller
         }
 
     }
-    public function destroy(wishlist $id)
-    {
-        $id->where('user_id',Auth::id())->first();
-        $id->delete();
-        return back()->with('status','product deleted from wishlist successfully');
-    }
     public function wishlistcount()
     {
         $wishlist=wishlist::where('user_id',Auth::id())->count();
         return response()->json(['count'=> $wishlist]);
+    }
+    public function wishlistremove(Request $request)
+    {
+        $wishlist=wishlist::find($request->wishlist_id);
+        $wishlist->delete();
+        return response()->json(['status'=>" item deleted from wishlist successfully"]);
     }
 }

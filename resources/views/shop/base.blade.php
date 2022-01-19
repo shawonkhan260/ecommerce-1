@@ -219,6 +219,33 @@
             });
 
         });
+        //remove item from wishlist
+        $(document).ready(function () {
+        $('.removewishlist').click(function (e) {
+            e.preventDefault();
+            var wishlist_id= $(this).closest('.product_data').find('.wishlist_id').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('wishlist.remove') }}",
+                data: {
+                    'wishlist_id':wishlist_id,
+                },
+                success: function (response) {
+                    $('.wishlistreload').load(location.href + " .wishlistreload");
+                    swal(response.status);
+                    loadwishlist();
+                }
+            });
+
+        });
+
+    });
 
     });
 </script>
