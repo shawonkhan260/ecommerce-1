@@ -44,11 +44,14 @@
                                 <tr>
                                     <td class="thumbnail-img">
                                         <a href="#">
-									<img class="img-fluid" src="/shop/images/img-pro-01.jpg" alt="" />
+                                            @php
+                                                $images=json_decode($item->product->image);
+                                            @endphp
+									<img class="img-fluid" src="{{Storage::url('photo/product/'.$images[0])}}" alt="" />
 								</a>
                                     </td>
                                     <td class="name-pr">
-                                        <a href="#">{{$item->product->name}}</a>
+                                        <a href="{{Route('productdetails',$item->product->id)}}">{{$item->product->name}}</a>
                                     </td>
                                     <td class="price-pr">
                                         {{$item->product->selling_price}}

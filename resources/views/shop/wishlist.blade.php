@@ -39,12 +39,13 @@
                                     <input type="hidden" class="product_id"  value="{{$item->product_id}}">
                                 <input type="hidden" class="product_qty"  value="1">
                                     <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/img-pro-01.jpg" alt="" />
-								</a>
+                                    @php
+                                        $images=json_decode($item->product->image);
+                                    @endphp
+                                    <img class="img-fluid" src="{{Storage::url('photo/product/'.$images[0])}}">
                                     </td>
                                     <td class="name-pr">
-                                        <a href="#">
+                                        <a href="{{Route('productdetails',$item->product->id)}}">
 									{{$item->product->name}}
 								</a>
                                     </td>

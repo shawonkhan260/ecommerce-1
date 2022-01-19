@@ -132,7 +132,7 @@
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     @if (Request::is('cart'))
                     @else
-                    <li class="side-menu"><a href="#">
+                    <li class=""><a href="{{Route('cart')}}">
                     <i class="fa fa-shopping-bag"></i>
 
                     @if (Auth::check())
@@ -153,33 +153,7 @@
             <!-- End Atribute Navigation -->
         </div>
         <!-- Start Side Menu -->
-        @if (Auth::check())
-        <div class="side">
-            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-            <li class="cart-box">
-                <ul class="cart-list">
-                    @foreach ($cart as $item)
-                    <li>
-                        <a href="#" class="photo"><img src="/shop/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">{{$item->product->name}} </a></h6>
-                        <p>{{$item->product_qty}}X - <span class="price">{{$item->product->selling_price}} ৳</span></p>
-                    </li>
 
-                    @endforeach
-                    <li class="total">
-                        <a href="{{Route('cart')}}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                    </li>
-                </ul>
-            </li>
-        </div>
-        @else
-        <div class="side">
-            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-            <li class="cart-box">
-                <h2>Please  first <a href="{{url('login')}}" type="button" class="btn btn-success">Log in</a></h2>
-            </li>
-        </div>
-        @endif
 
         <!-- End Side Menu -->
     </nav>

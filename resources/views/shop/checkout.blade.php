@@ -157,7 +157,7 @@
                                     @endphp
                                     @foreach ($cart as $item)
                                     <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> {{$item->product->name}}</a>
+                                        <div class="media-body"> <a href="{{Route('productdetails',$item->product->id)}}"> {{$item->product->name}}</a>
                                             <div class="small text-muted">{{$price=$item->product->original_price}} <span class="mx-2">|</span> {{$qty=$item->product_qty}} <span class="mx-2">|</span> Subtotal: {{$producttotal=$price*$qty}}</div>
                                         </div>
                                     </div>
