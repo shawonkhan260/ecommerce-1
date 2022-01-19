@@ -91,18 +91,27 @@
                     <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
                     @if (Auth::check())
+                    <li class="dropdown">
 
-                    <li class="nav-item">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                         {{ __('Logout') }}
-                     </a>
+                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">My account</a>
+                        <ul class="dropdown-menu">
 
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                         @csrf
-                     </form>
+                            <li><a href="">Profile</a></li>
+                            <li><a href="{{Route('orderlist')}}">order list</a></li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                             </a>
+                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                 @csrf
+                             </form>
+                            </li>
+                        </ul>
                     </li>
+                    @else
+                    <li class="nav-item"><a class="nav-link" href="{{Route('login')}}">Log in</a></li>
                     @endif
 
                     @php

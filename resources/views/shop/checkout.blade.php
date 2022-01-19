@@ -29,43 +29,43 @@
                         </div>
                             <div class="mb-3">
                                 <label >Full name *</label>
-                                <input type="text" class="form-control" name="name"  placeholder="" value="@if ($userinfo!=Null){{$userinfo->name}}@endif" required>
+                                <input type="text" class="form-control" name="name"  placeholder="" value="{{$userinfo->name}}" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="">Phone no. *</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="phone" pattern="[0-9]{11}" maxlength="11" placeholder="" required>
+                                    <input type="text" class="form-control" name="phone" pattern="[0-9]{11}" value="@if ($userinfo!=Null){{$userinfo->phone}}@endif" maxlength="11" placeholder="" required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" name="email"  placeholder="">
+                                <input type="email" class="form-control" name="email" value="@if ($userinfo!=Null){{$userinfo->email}}@endif" placeholder="">
                             </div>
                             <div class="mb-3">
                                 <label for="address">Address 1 *</label>
-                                <input type="text" class="form-control" name="address1"  placeholder="" required>
+                                <input type="text" class="form-control" name="address1" value="@if ($userinfo!=Null){{$userinfo->address1}}@endif" placeholder="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="address2">Address 2 *</label>
-                                <input type="text" class="form-control" name="address2" placeholder="">
+                                <input type="text" class="form-control" name="address2"value="@if ($userinfo!=Null){{$userinfo->address2}}@endif" placeholder="">
                             </div>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label for="country">Country *</label>
-                                    <input type="text" class="form-control" name="country"  placeholder="">
+                                    <input type="text" class="form-control" name="country"value="@if ($userinfo!=Null){{$userinfo->country}}@endif"  placeholder="">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="state">State *</label>
-                                    <input type="text" class="form-control" name="state"  placeholder="">
+                                    <input type="text" class="form-control" name="state"  value="@if ($userinfo!=Null){{$userinfo->state}}@endif"  placeholder="">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="state">city *</label>
-                                    <input type="text" class="form-control" name="city"  placeholder="">
+                                    <input type="text" class="form-control" name="city"  value="@if ($userinfo!=Null){{$userinfo->city}}@endif"  placeholder="">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" name="zip" placeholder="" required>
+                                    <input type="text" class="form-control" name="zip" value="@if ($userinfo!=Null){{$userinfo->zipcode}}@endif"  placeholder="" required>
                                     <div class="invalid-feedback"> Zip code required. </div>
                                 </div>
                             </div>
@@ -154,7 +154,6 @@
                                     @php
                                     $subtotal=0;
                                     $discount=0;
-                                    $total=0;
                                     @endphp
                                     @foreach ($cart as $item)
                                     <div class="media mb-2 border-bottom">
@@ -196,7 +195,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
-                                    <div class="ml-auto font-weight-bold"> $ {{$tax=$item->product->tax}} </div>
+                                    <div class="ml-auto font-weight-bold"> $ 0 </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
@@ -205,9 +204,10 @@
                                 <hr>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ {{$subtotal-$discount+$tax}} </div>
+                                    <div class="ml-auto h5"> $ {{$total=$subtotal-$discount}} </div>
                                 </div>
                                 <hr> </div>
+                                <input type="hidden" value="{{$total}}" name="total">
                         </div>
                         <div class="col-12 d-flex shopping-box">
                             <button type="submit" class="ml-auto btn hvr-hover">Place order</button>

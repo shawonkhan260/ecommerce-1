@@ -142,10 +142,9 @@ class ProductController extends Controller
             $file->storeAs('public/photo/product',$filename);
             $imagedata[]=$filename;
             }
-
+        $product->image=json_encode($imagedata);
 
         }
-        $product->image=json_encode($imagedata);
         $product->name=$request->name;
         $product->cat_id=$request->cat_id;
         $product->small_description=$request->small_description;

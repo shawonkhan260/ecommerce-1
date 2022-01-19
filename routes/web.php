@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 //use App\Http\Controllers\ProductController;
 use Illuminate\Routing\RouteAction;
@@ -48,6 +49,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('category_delete/{category}',[CategoryController::class,'destroy'])->name('category.delete');
     Route::resource('product',ProductController::class);
 
+    //pending order list
+    Route::get('pendingorderlist',[OrderController::class,'pendingorder'])->name('pendingorder.list');
+    Route::get('allorderlist',[OrderController::class,'allorder'])->name('allorder.list');
+    Route::post('productapprove/{id}',[OrderController::class,'productapprove'])->name('productapprove');
+    Route::get('showorderdetails/{id}',[OrderController::class,'showorderdetails'])->name('showorderdetails');
 
 });
 Route::get('/',[HomePageController::class,'index'])->name('shop');
@@ -74,6 +80,12 @@ Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('w
 //checkout
 Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::post('checkoutstore',[CheckoutController::class,'store'])->name('checkout.store');
+Route::post('cancleorder{id}',[CheckoutController::class,'cancleorder'])->name('cancleorder');
+
+//productorderlist user
+Route::get('orderlist',[CheckoutController::class,'orderlist'])->name('orderlist');
+Route::get('orderdetails/{id}',[CheckoutController::class,'orderdetails'])->name('orderdetails');
+
 
 
 

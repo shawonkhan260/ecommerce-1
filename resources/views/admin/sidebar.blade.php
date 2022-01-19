@@ -60,6 +60,28 @@
                         <p>Product</p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a data-toggle="collapse" href="#submenu">
+                        <i class="fas fa-bars"></i>
+                        <p>Product order</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="submenu">
+                        <ul class="nav nav-collapse">
+
+                            <li>
+                                <a href="{{Route('pendingorder.list')}}">
+                                    <span class="sub-item">pending order list</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{Route('allorder.list')}}">
+                                    <span class="sub-item">all order list</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#submenu">

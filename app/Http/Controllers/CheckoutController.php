@@ -35,6 +35,7 @@ class CheckoutController extends Controller
         $order->state=$request->state;
         $order->country=$request->country;
         $order->zipcode=$request->zip;
+        $order->totall=$request->total;
         $order->user_id=Auth::id();
         $order->tracking_id='shawon'.rand(100000,999999);
         $order->save();
@@ -53,5 +54,23 @@ class CheckoutController extends Controller
         cart::destroy($cartitems);
         return redirect()->route('shop')->with('status',"order placed successfully");
 
+    }
+
+    public function orderlist()
+    {
+        $orders=Order::where('user_id',Auth::id())->get();
+        return view('shop.productorderlist',compact('orders'));
+    }
+    public function orderdetails($id)
+    {
+        $order=Order::find($id);
+        return view('shop.userorderdetails',compact('order'));
+    }
+    public function cancleorder($id,Request $request)
+    {
+        $order=Order::where('user_id',Auth::id())->where('id',$id)->first();
+        $order->status=$request->status;
+        $order->update();
+        return back();
     }
 }

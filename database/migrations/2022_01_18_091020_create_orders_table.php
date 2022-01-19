@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('country');
+            $table->string('totall');
             $table->string('zipcode');
             $table->string('tracking_id');
             $table->tinyInteger('status')->default('0');

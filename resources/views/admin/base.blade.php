@@ -17,6 +17,8 @@
 			}
 		});
 	</script>
+@yield('extra_css')
+
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}">
