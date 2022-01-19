@@ -3,12 +3,10 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
-//use App\Http\Controllers\ProductController;
-use Illuminate\Routing\RouteAction;
-use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,8 +52,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('allorderlist',[OrderController::class,'allorder'])->name('allorder.list');
     Route::post('productapprove/{id}',[OrderController::class,'productapprove'])->name('productapprove');
     Route::get('showorderdetails/{id}',[OrderController::class,'showorderdetails'])->name('showorderdetails');
+    Route::get('adminprofile', function () {
+        return view('admin.profile');
+    })->name('profile');
 
 });
+
+//ecommerce home
 Route::get('/',[HomePageController::class,'index'])->name('shop');
 Route::get('/categoryproduct/{id}',[HomePageController::class,'categorywiseproduct'])->name('category.product');
 Route::get('/categorylist',[HomePageController::class,'categorylist'])->name('categorylist');
@@ -63,40 +66,39 @@ Route::get('/productdetails/{id}',[HomePageController::class,'productdetails'])-
 Route::get('/productlist',[HomePageController::class,'productlist'])->name('product.list');
 Route::post('/search',[HomePageController::class,'searchproduct'])->name('search');
 
+Route::middleware(['auth'])->group(function () {
+    //profile
+    Route::get('userprofile', function () {
+        return view('shop.profile');
+    })->name('userprofile');
+    Route::post('editprofile',[HomeController::class,'editprofile'])->name('editprofile');
 
-//addtocart
-Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
-Route::get('cart',[CartController::class,'index'])->name('cart');
-Route::get('cartdelete/{cart}',[CartController::class,'destroy'])->name('cart.destroy');
-Route::post('cartupdate',[CartController::class,'update'])->name('cart.update');
-Route::get('cartcount',[CartController::class,'cartcount'])->name('cart.count');
-
-//addtowishlist
-Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
-Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
-Route::get('wishlistdestroy/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
-Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('wishlist.count');
-
-//checkout
-Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
-Route::post('checkoutstore',[CheckoutController::class,'store'])->name('checkout.store');
-Route::post('cancleorder{id}',[CheckoutController::class,'cancleorder'])->name('cancleorder');
-
-//productorderlist user
-Route::get('orderlist',[CheckoutController::class,'orderlist'])->name('orderlist');
-Route::get('orderdetails/{id}',[CheckoutController::class,'orderdetails'])->name('orderdetails');
+    //addtocart
+    Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
+    Route::get('cart',[CartController::class,'index'])->name('cart');
+    Route::get('cartdelete/{cart}',[CartController::class,'destroy'])->name('cart.destroy');
+    Route::post('cartupdate',[CartController::class,'update'])->name('cart.update');
+    Route::get('cartcount',[CartController::class,'cartcount'])->name('cart.count');
 
 
+    //addtowishlist
+    Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
+    Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
+    Route::get('wishlistdestroy/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
+    Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('wishlist.count');
 
+    //checkout
+    Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
+    Route::post('checkoutstore',[CheckoutController::class,'store'])->name('checkout.store');
+    Route::post('cancleorder{id}',[CheckoutController::class,'cancleorder'])->name('cancleorder');
 
+    //productorderlist user
+    Route::get('orderlist',[CheckoutController::class,'orderlist'])->name('orderlist');
+    Route::get('orderdetails/{id}',[CheckoutController::class,'orderdetails'])->name('orderdetails');
 
+});
 
-
-
-Route::get('/about', function () {
-    return view('shop.about');
-})->name('about');
-
+//product details
 Route::get('/details', function () {
     return view('shop.product_details');
 })->name('details');

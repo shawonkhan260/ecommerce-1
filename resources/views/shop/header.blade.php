@@ -88,15 +88,13 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
                     @if (Auth::check())
                     <li class="dropdown">
 
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">My account</a>
                         <ul class="dropdown-menu">
 
-                            <li><a href="">Profile</a></li>
+                            <li><a href="{{Route('userprofile')}}">Profile</a></li>
                             <li><a href="{{Route('orderlist')}}">order list</a></li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="{{ route('logout') }}"

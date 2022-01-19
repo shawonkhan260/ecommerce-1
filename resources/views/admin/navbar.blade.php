@@ -150,16 +150,16 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="{{asset('admin/assets/img/profile.jpg')}}" alt="..." class="avatar-img rounded-circle">
+                        <img src="storage/photo/profile/{{Auth::user()->photo}}" alt="..." class="avatar-img rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <li>
                         <div class="user-box">
-                            <div class="avatar-lg"><img src="{{asset('admin/assets/img/profile.jpg')}}" alt="image profile" class="avatar-img rounded"></div>
+                            <div class="avatar-lg"><img src="storage/photo/profile/{{Auth::user()->photo}}" alt="image profile" class="avatar-img rounded"></div>
                             <div class="u-text">
-                                <h4>Hizrian</h4>
-                                <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                <h4>{{Auth::user()->name}}</h4>
+                                <p class="text-muted">{{Auth::user()->email}}</p><a href="{{Route('profile')}}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                             </div>
                         </div>
                     </li>

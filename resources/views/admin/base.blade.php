@@ -17,12 +17,12 @@
 			}
 		});
 	</script>
-@yield('extra_css')
-
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('admin/assets/css/azzara.min.css')}}">
+@yield('extra_css')
+
 
 </head>
 <body>
