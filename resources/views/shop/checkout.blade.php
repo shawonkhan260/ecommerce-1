@@ -29,22 +29,24 @@
                         </div>
                             <div class="mb-3">
                                 <label >Full name *</label>
-                                <input type="text" class="form-control" name="name"  placeholder="" value="{{$userinfo->name}}" required>
+                                <input type="text"  class="form-control name" name="name"  placeholder="" value="{{$userinfo->name}}" >
+                                <span id="name_error" class="text-danger" ></span>
                             </div>
 
                             <div class="mb-3">
                                 <label for="">Phone no. *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="phone" pattern="[0-9]{11}" value="@if ($userinfo!=Null){{$userinfo->phone}}@endif" maxlength="11" placeholder="" required>
-                                </div>
+                                <input type="text" class="form-control phone"  name="phone" pattern="[0-9]{11}" value="@if ($userinfo!=Null){{$userinfo->phone}}@endif" maxlength="11" placeholder="" >
+                                <span id="phone_error" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" name="email" value="@if ($userinfo!=Null){{$userinfo->email}}@endif" placeholder="">
+                                <input type="email" class="form-control email"  name="email" value="@if ($userinfo!=Null){{$userinfo->email}}@endif" placeholder="">
+                            <span id="email_error" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="address">Address 1 *</label>
-                                <input type="text" class="form-control" name="address1" value="@if ($userinfo!=Null){{$userinfo->address1}}@endif" placeholder="" required>
+                                <input type="text" class="form-control address1"  name="address1" value="@if ($userinfo!=Null){{$userinfo->address1}}@endif" placeholder="" >
+                            <span id="address1_error" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="address2">Address 2 *</label>
@@ -53,73 +55,26 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label for="country">Country *</label>
-                                    <input type="text" class="form-control" name="country"value="@if ($userinfo!=Null){{$userinfo->country}}@endif"  placeholder="">
+                                    <input type="text" class="form-control country"  name="country"value="@if ($userinfo!=Null){{$userinfo->country}}@endif"  placeholder="">
+                                <span id="country_error" class="text-danger"></span>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="state">State *</label>
-                                    <input type="text" class="form-control" name="state"  value="@if ($userinfo!=Null){{$userinfo->state}}@endif"  placeholder="">
+                                    <input type="text" class="form-control state"  name="state"  value="@if ($userinfo!=Null){{$userinfo->state}}@endif"  placeholder="">
+                                <span id="state_error " class="text-danger"></span>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="state">city *</label>
-                                    <input type="text" class="form-control" name="city"  value="@if ($userinfo!=Null){{$userinfo->city}}@endif"  placeholder="">
+                                    <input type="text" class="form-control city"  name="city"  value="@if ($userinfo!=Null){{$userinfo->city}}@endif"  placeholder="">
+                                <span id="city_error" class="text-danger"></span>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" name="zip" value="@if ($userinfo!=Null){{$userinfo->zipcode}}@endif"  placeholder="" required>
-                                    <div class="invalid-feedback"> Zip code required. </div>
-                                </div>
-                            </div>
+                                    <input type="text" class="form-control zip"  name="zip" value="@if ($userinfo!=Null){{$userinfo->zipcode}}@endif"  placeholder="" >
+                                    <span id="zip_error" class="text-danger"></span>
+                                 </div>
 
-                            <hr class="mb-4">
-                            <div class="title"> <span>Payment</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio"  class="custom-control-input" required>
-                                    <label class="custom-control-label" data-toggle="collapse" data-target="#cardexpand:not(.show)" href=""   for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit" data-toggle="collapse" data-target="#cardexpand.show">cash on delivery</label>
-                                </div>
                             </div>
-                            <div id="cardexpand" class="collapse">
-                                <div class="row" >
-                                    <div class="col-md-6 mb-3">
-                                        <label for="cc-name">Name on card</label>
-                                        <input type="text" class="form-control" id="cc-name" placeholder="" > <small class="text-muted">Full name as displayed on card</small>
-                                        <div class="invalid-feedback"> Name on card is required </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="cc-number">Credit card number</label>
-                                        <input type="text" class="form-control" id="cc-number" placeholder="" >
-                                        <div class="invalid-feedback"> Credit card number is required </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-expiration">Expiration</label>
-                                        <input type="text" class="form-control" id="cc-expiration" placeholder="" >
-                                        <div class="invalid-feedback"> Expiration date required </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-expiration">CVV</label>
-                                        <input type="text" class="form-control" id="cc-cvv" placeholder="" >
-                                        <div class="invalid-feedback"> Security code required </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="payment-icon">
-                                            <ul>
-                                                <li><img class="img-fluid" src="/shop/images/payment-icon/1.png" alt=""></li>
-                                                <li><img class="img-fluid" src="/shop/images/payment-icon/2.png" alt=""></li>
-                                                <li><img class="img-fluid" src="/shop/images/payment-icon/3.png" alt=""></li>
-                                                <li><img class="img-fluid" src="/shop/images/payment-icon/5.png" alt=""></li>
-                                                <li><img class="img-fluid" src="/shop/images/payment-icon/7.png" alt=""></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                            <hr class="mb-1">
 
                     </div>
                 </div>
@@ -209,8 +164,9 @@
                                 <hr> </div>
                                 <input type="hidden" value="{{$total}}" name="total">
                         </div>
-                        <div class="col-12 d-flex shopping-box">
-                            <button type="submit" class="ml-auto btn hvr-hover">Place order</button>
+                        <div class="col-12  shopping-box">
+                            <button type="submit" class="btn btn-outline-primary">Place order cashon delivery</button>
+                            <button type="button" class="btn btn-outline-success razorpay_btn">pay with Razorpay</button>
                         </div>
 
                     </div>
@@ -223,4 +179,102 @@
     <!-- End Cart -->
 @endsection
 @section('extra_js')
+<script>
+    $(document).ready(function () {
+        $('.razorpay_btn').click(function (e) {
+            e.preventDefault();
+            var name=$('.name').val();
+            var phone=$('.phone').val();
+            var email=$('.email').val();
+            var address1=$('.address1').val();
+            var country=$('.country').val();
+            var state=$('.state').val();
+            var city=$('.city').val();
+            var zip=$('.zip').val();
+
+            if(!name)
+            {
+                name_error="First name is Required";
+                $('#name_error').html('');
+                $('#name_error').html(name_error);
+            }
+            else{
+                name_error="";
+                $('#name_error').html('');//for remove error message
+            }
+            if(!phone)
+            {
+                phone_error="phone is Required";
+                $('#phone_error').html('');
+                $('#phone_error').html(phone_error);
+            }
+            else{
+                phone_error="";
+                $('#phone_error').html('');
+            }
+            if(!email)
+            {
+                email_error="email is Required";
+                $('#email_error').html('');
+                $('#email_error').html(email_error);
+            }
+            else{
+                email_error="";
+                $('#email_error').html('');
+            }
+            if(!address1)
+            {
+                address1_error="address1 is Required";
+                $('#address1_error').html('');
+                $('#address1_error').html(address1_error);
+            }
+            else{
+                address1_error="";
+                $('#address1_error').html('');
+            }
+            if(!country)
+            {
+                country_error="country is Required";
+                $('#country_error').html('');
+                $('#country_error').html(country_error);
+            }
+            else{
+                country_error="";
+                $('#country_error').html('');
+            }
+            if(!state)
+            {
+                state_error="state is Required";
+                $('#state_error').html('');
+                $('#state_error').html(state_error);
+            }
+            else{
+                state_error="";
+                $('#state_error').html('');
+            }
+            if(!city)
+            {
+                city_error="city is Required";
+                $('#city_error').html('');
+                $('#city_error').html(city_error);
+            }
+            else{
+                city_error="";
+                $('#city_error').html('');
+            }
+            if(!zip)
+            {
+                zip_error="zip is Required";
+                $('#zip_error').html('');
+                $('#zip_error').html(zip_error);
+            }
+            else{
+                zip_error="";
+                $('#zip_error').html('');
+            }
+
+
+        });
+    });
+</script>
 @endsection
