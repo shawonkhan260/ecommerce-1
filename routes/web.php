@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
     Route::post('checkoutstore',[CheckoutController::class,'store'])->name('checkout.store');
     Route::post('cancleorder{id}',[CheckoutController::class,'cancleorder'])->name('cancleorder');
+    Route::post('razorpay',[CheckoutController::class,'razorpay'])->name('razorpay');
 
     //productorderlist user
     Route::get('orderlist',[CheckoutController::class,'orderlist'])->name('orderlist');

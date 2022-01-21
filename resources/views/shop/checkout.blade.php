@@ -29,7 +29,7 @@
                         </div>
                             <div class="mb-3">
                                 <label >Full name *</label>
-                                <input type="text"  class="form-control name" name="name"  placeholder="" value="{{$userinfo->name}}" >
+                                <input type="text"  class="form-control name" name="name"  placeholder="" value="@if ($userinfo!=Null){{$userinfo->phone}} @else {{Auth::user()->name}}@endif" >
                                 <span id="name_error" class="text-danger" ></span>
                             </div>
 
@@ -165,6 +165,7 @@
                                 <input type="hidden" value="{{$total}}" name="total">
                         </div>
                         <div class="col-12  shopping-box">
+                            <input type="hidden" name="payment_method" value="COD">
                             <button type="submit" class="btn btn-outline-primary">Place order cashon delivery</button>
                             <button type="button" class="btn btn-outline-success razorpay_btn">pay with Razorpay</button>
                         </div>
@@ -191,6 +192,12 @@
             var state=$('.state').val();
             var city=$('.city').val();
             var zip=$('.zip').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             if(!name)
             {
@@ -273,8 +280,88 @@
                 $('#zip_error').html('');
             }
 
+            if(name_error!=''|| phone_error!=''||email_error!=''||address1_error!=''||country_error!=''||state_error!=''||city_error!=''||zip_error!='')
+            {
+                return false;
+            }
+            else{
+                var data={
+                    'name':name,
+                    'phone':phone,
+                    'email':email,
+                    'address1':address1,
+                    'country':country,
+                    'state':state,
+                    'city':city,
+                    'zip':zip
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{{Route('razorpay')}}",
+                    data: data,
+                    success: function (response) {
+                        var options = {
+                        "key": "rzp_test_SxvObkAH2FewJ3", // Enter the Key ID generated from the Dashboard
+                        "amount": response.total_price*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": response.name,
+                        "description": "thank you for choosing us",
+                        "image": "https://example.com/your_logo",
+                        "handler": function (responsea){
+                            //alert(responsea.razorpay_payment_id);
+                            $.ajax({
+                                type: "POST",
+                                url: "{{Route('checkout.store')}}",
+                                data:{
+                                        'name':response.name,
+                                        'phone':response.phone,
+                                        'email':response.email,
+                                        'address1':response.address1,
+                                        'country':response.country,
+                                        'state':response.state,
+                                        'city':response.city,
+                                        'zip':response.zip,
+                                        'total':response.total_price,
+                                        'payment_method':"paid by razor pay",
+                                        'payment_id':responsea.razorpay_payment_id
+                                },
+                                success: function (responseb) {
+                                    //alert(responseb.status);
+                                    //after click pop up ok button then it will redirect
+                                    swal(responseb.status)
+                                    .then((value)=>{
+                                        window.location.href="/orderlist";
+                                    });
+                                    //window.location.href="/orderlist"; // it will go /orderlist page without ok click
+
+
+
+                                }
+                            });
+                        },
+                        "prefill": {
+                            "name": response.name,
+                            "email": response.email,
+                            "contact": response.phone
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.open();
+
+                    }
+                });
+            }
+
 
         });
     });
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+</script>
+
 @endsection

@@ -36,6 +36,8 @@ class CheckoutController extends Controller
         $order->country=$request->country;
         $order->zipcode=$request->zip;
         $order->totall=$request->total;
+        $order->payment_method=$request->payment_method;
+        $order->payment_id=$request->payment_id;
         $order->user_id=Auth::id();
         $order->tracking_id='shawon'.rand(100000,999999);
         $order->save();
@@ -52,6 +54,9 @@ class CheckoutController extends Controller
 
         }
         cart::destroy($cartitems);
+        if ($order->payment_method=="paid by razor pay") {
+            return response()->json(['status'=>"order placed successfully"]);
+        }
         return redirect()->route('shop')->with('status',"order placed successfully");
 
     }
@@ -72,5 +77,33 @@ class CheckoutController extends Controller
         $order->status=$request->status;
         $order->update();
         return back();
+    }
+
+    public function razorpay(Request $request)
+    {
+        $cart=cart::where('user_id',Auth::id())->get();
+        $total_price=0;
+        foreach ($cart as $item) {
+            $total_price+=$item->product->selling_price * $item->product_qty;
+        }
+        $name=$request->name;
+        $phone=$request->phone;
+        $email=$request->email;
+        $address1=$request->address1;
+        $country=$request->country;
+        $state=$request->state;
+        $city=$request->city;
+        $zip=$request->zip;
+        return response()->json([
+            'name'=>$name,
+            'phone'=>$phone,
+            'email'=>$email,
+            'address1'=>$address1,
+            'country'=>$country,
+            'state'=>$state,
+            'city'=>$city,
+            'zip'=>$zip,
+            'total_price'=>$total_price
+        ]);
     }
 }
