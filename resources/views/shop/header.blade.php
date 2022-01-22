@@ -159,7 +159,7 @@
 </header>
 <!-- End Main Top -->
     <!-- Start Top Search -->
-    <form action="{{route('search')}}" method="POST">
+    <form action="{{route('search')}}" method="GET">
         @csrf
 
     <div class="top-search">

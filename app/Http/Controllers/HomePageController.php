@@ -22,12 +22,12 @@ class HomePageController extends Controller
     }
     public function productlist()
     {
-        $products=Product::all();
+        $products=Product::paginate(12);
         return view('shop.productlist',compact('products'));
     }
     public function searchproduct(Request $request)
     {
-        $products=Product::where('name','LIKE','%'.$request->search.'%')->get();
+        $products=Product::where('name','LIKE','%'.$request->search.'%')->paginate(12);
         return view('shop.productlist',compact('products'));
     }
     public function categorylist()
