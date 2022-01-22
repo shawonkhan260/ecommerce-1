@@ -166,8 +166,8 @@
         <div class="container">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" name="search" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                <input type="text" class="form-control" id="searchproduct" name="search" placeholder="Search">
+                <span class="input-group-addon close-search" ><i class="fa fa-times"></i></span>
             </div>
         </div>
     </div>

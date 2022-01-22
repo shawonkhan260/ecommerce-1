@@ -41,4 +41,13 @@ class HomePageController extends Controller
         $images=json_decode($product->image);
         return view('shop.product_details',compact('product','images'));
     }
+    public function autocomplete()
+    {
+        $product=Product::select('name')->get();
+        $data=[];
+        foreach ($product as $item) {
+            $data[]=$item['name'];
+        }
+        return $data;
+    }
 }

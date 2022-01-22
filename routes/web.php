@@ -65,6 +65,7 @@ Route::get('/categorylist',[HomePageController::class,'categorylist'])->name('ca
 Route::get('/productdetails/{id}',[HomePageController::class,'productdetails'])->name('productdetails');
 Route::get('/productlist',[HomePageController::class,'productlist'])->name('product.list');
 Route::post('/search',[HomePageController::class,'searchproduct'])->name('search');
+Route::get('autocomplete',[HomePageController::class,'autocomplete'])->name('autocomplete');
 
 Route::middleware(['auth'])->group(function () {
     //profile

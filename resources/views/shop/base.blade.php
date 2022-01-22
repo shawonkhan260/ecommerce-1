@@ -36,6 +36,8 @@
         }
     </style>
     @yield('extra_css')
+    {{-- jquery autocomplete --}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -137,6 +139,9 @@
     <script src="/shop/js/contact-form-script.js"></script>
     <script src="/shop/js/custom.js"></script>
     @yield('extra_js')
+
+    {{-- jquery auto complete --}}
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <!-- Sweet Alert -->
 <script src="{{asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
 @if (session('status'))
@@ -220,7 +225,6 @@
 
         });
         //remove item from wishlist
-        $(document).ready(function () {
         $('.removewishlist').click(function (e) {
             e.preventDefault();
             var wishlist_id= $(this).closest('.product_data').find('.wishlist_id').val();
@@ -246,8 +250,23 @@
         });
 
     });
-
+</script>
+{{-- jquery auto complete --}}
+<script>
+    var availableTags = [];
+    $.ajax({
+        type: "GET",
+        url: "{{Route('autocomplete')}}",
+        success: function (response) {
+            autocomplete(response);
+        }
     });
+    function autocomplete(availableTags)
+    {
+        $( "#searchproduct" ).autocomplete({
+        source: availableTags
+    });
+    }
 </script>
 </body>
 
