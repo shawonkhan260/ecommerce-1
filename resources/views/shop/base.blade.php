@@ -34,19 +34,7 @@
         a{
             text-decoration: none !important;
         }
-        nav svg{
-            max-width: 20px;
-        }
-        .pagination {
-  display: inline-block;
-}
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
     </style>
     @yield('extra_css')
     {{-- jquery autocomplete --}}

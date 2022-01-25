@@ -75,7 +75,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('editprofile',[HomeController::class,'editprofile'])->name('editprofile');
 
     //addtocart
-    Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
     Route::get('cart',[CartController::class,'index'])->name('cart');
     Route::get('cartdelete/{cart}',[CartController::class,'destroy'])->name('cart.destroy');
     Route::post('cartupdate',[CartController::class,'update'])->name('cart.update');
@@ -84,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
     //addtowishlist
     Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist');
-    Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
     Route::get('wishlistcount',[WishlistController::class,'wishlistcount'])->name('wishlist.count');
 
     //checkout
@@ -98,6 +96,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('orderdetails/{id}',[CheckoutController::class,'orderdetails'])->name('orderdetails');
 
 });
+
+//ajax add to cart wishlist
+Route::post('addtocart',[CartController::class,'addtocart'])->name('addtocart');
+Route::post('addtowishlist',[WishlistController::class,'addtowishlist'])->name('addtowishlist');
+
+
 
 //product details
 Route::get('/details', function () {
