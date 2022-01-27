@@ -13,7 +13,7 @@ class ApiController extends Controller
     {
         if ($id=="") {
             $product=product::all();
-            return response()->json($product);
+            return response()->json(['product'=>$product,200]);
         }
         else {
             $product=product::find($id);
