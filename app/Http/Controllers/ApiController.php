@@ -24,6 +24,11 @@ class ApiController extends Controller
     // try to fetch api without ajax only for different server or site api
     public function controllerapi()
     {
+        //for own api call
+        //$request = Request::create('/api/product/', 'GET');
+        //$datas = json_decode(Route::dispatch($request)->getContent());
+        //$datas = Route::dispatch($request); (also work insted of 2nd line)
+        //in view $data->name
         $datas=Http::get('https://jsonplaceholder.typicode.com/posts')->json();
         return view('controllerapi',compact('datas'));
 
