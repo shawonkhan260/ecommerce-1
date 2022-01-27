@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
+use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,3 +111,10 @@ Route::get('/details', function () {
 
 //wishlist remove button
 Route::post('wishlistremove',[WishlistController::class,'wishlistremove'])->name('wishlist.remove');
+
+
+//api retrive example
+Route::get('apifetch', function () {
+    return view('api');
+
+});
