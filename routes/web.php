@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -119,4 +118,3 @@ Route::get('apifetch', function () {
     return view('api');
 
 });
-Route::get('controllerapi', [ApiController::class,'controllerapi']);

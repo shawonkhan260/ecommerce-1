@@ -41,12 +41,12 @@
 
     </script>
     <script>
-//call from own api data is inside extra array thats why response.product (here product is array name)
+
            $.ajax({
                type: "get",
                url:"http://127.0.0.1:8000/api/product",
                success: function (response) {
-                 response.product.forEach(function(response) {
+                 response.forEach(function(response) {
                      $('#list').append('<div  class=" my-5 bg-success"><h1>'+response.name+'</h1><br>'+'<h3>'+response.description+'</h3></div>');
                  });
                }

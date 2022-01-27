@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
@@ -14,19 +13,12 @@ class ApiController extends Controller
     {
         if ($id=="") {
             $product=product::all();
-            return response()->json(['product'=>$product,200]);
+            return response()->json($product);
         }
         else {
             $product=product::find($id);
             return response()->json(['product'=>$product,200]);
         }
-    }
-    // try to fetch api without ajax only for different server or site api
-    public function controllerapi()
-    {
-        $datas=Http::get('https://jsonplaceholder.typicode.com/posts')->json();
-        return view('controllerapi',compact('datas'));
-
     }
     //this option is for new product add
     public function addproduct(Request $request)
