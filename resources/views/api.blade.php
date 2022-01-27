@@ -47,7 +47,7 @@
                url:"http://127.0.0.1:8000/api/product",
                success: function (response) {
                  response.product.forEach(function(response) {
-                     $('#list').append('<div  class=" my-5 bg-success"><h1>'+response.name+'</h1><br>'+'<h3>'+response.description+'</h3><form action="http://127.0.0.1:8000/api/deleteproduct/'+response.id+'" method="post"><button class="btn btn-info" id="delete"><input hidden name="_method"  value="DELETE">delete</button></form></div>');
+                     $('#list').append('<div  class=" my-5 bg-success"><h1>'+response.name+'</h1><br>'+'<h3>'+response.description+'</h3></div>');
                  });
                }
            });
