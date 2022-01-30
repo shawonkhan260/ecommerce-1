@@ -68,7 +68,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-                <a class="navbar-brand" href="{{Route('shop')}}"><img src="/shop/images/logo.png" class="logo" alt=""></a>
+                <a class="navbar-brand" href="{{Route('shop')}}"><img src="/shop/images/icon/icon4.png" width="80" class="logo" alt=""></a>
+                <a class="navbar-brand" href="{{Route('shop')}}"><img src="/shop/images/icon/icon6.png"  class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -81,7 +82,7 @@
                         $categorys=App\Models\category::all()
 
                         @endphp
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Category</a>
+                        <a href="{{Route('categorylist')}}" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Category</a>
                         <ul class="dropdown-menu">
                             @foreach ($categorys as $category )
                             <li><a href="{{Route('category.product',$category->id)}}">{{$category->name}}</a></li>

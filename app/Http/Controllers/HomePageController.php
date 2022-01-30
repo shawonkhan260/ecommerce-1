@@ -11,7 +11,7 @@ class HomePageController extends Controller
     public function index()
     {
         $categorys=Category::all();
-        $products=Product::where('tranding','1')->take(10)->get();
+        $products=Product::where('tranding','1')->take(32)->get();
         return view('shop.home',compact('categorys','products'));
     }
     public function categorywiseproduct($id)
